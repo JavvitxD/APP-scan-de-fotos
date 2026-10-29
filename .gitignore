@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+*.pyc
+build/
+dist/
+vendor/
+Proyectos/
+.pytest_cache/
+*.spec.bak

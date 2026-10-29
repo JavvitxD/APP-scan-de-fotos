@@ -1,0 +1,72 @@
+name: Construir para Windows
+
+on:
+  push:
+    branches: ["**"]
+    tags: ["v*"]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements*.txt
+
+      - name: Instalar dependencias
+        run: python -m pip install -r requirements-dev.txt
+
+      - name: Instalar Tesseract OCR
+        run: |
+          choco install tesseract -y --no-progress
+          foreach ($lang in @("spa", "osd")) {
+            Invoke-WebRequest "https://github.com/tesseract-ocr/tessdata/raw/main/$lang.traineddata" `
+              -OutFile "C:\Program Files\Tesseract-OCR\tessdata\$lang.traineddata"
+          }
+          & "C:\Program Files\Tesseract-OCR\tesseract.exe" --list-langs
+
+      - name: Pruebas
+        run: python -m pytest -q tests
+
+      - name: Construir carpeta portátil
+        run: powershell -ExecutionPolicy Bypass -File packaging\construir.ps1
+
+      - name: Probar el .exe (transcribir una página de muestra)
+        run: |
+          $report = Join-Path $env:RUNNER_TEMP "informe.txt"
+          $p = Start-Process -FilePath "dist\EscanerLibros\EscanerLibros.exe" `
+                 -ArgumentList "--autotest", "`"$report`"" -Wait -PassThru
+          Get-Content $report -Encoding UTF8
+          if ($p.ExitCode -ne 0) { throw "La prueba del .exe falló" }
+          if (-not (Select-String -Path $report -SimpleMatch "EscanerLibros\tesseract")) {
+            throw "El .exe no usó el Tesseract incluido en la carpeta"
+          }
+
+      - name: Probar que la ventana abre
+        run: |
+          $env:QT_QPA_PLATFORM = "offscreen"
+          $p = Start-Process -FilePath "dist\EscanerLibros\EscanerLibros.exe" -ArgumentList "--smoke" -PassThru
+          if (-not $p.WaitForExit(90000)) { $p.Kill(); throw "La ventana no cerró a tiempo" }
+          if ($p.ExitCode -ne 0) { throw "La ventana falló al abrir (código $($p.ExitCode))" }
+
+      - name: Subir la carpeta para descargar
+        uses: actions/upload-artifact@v4
+        with:
+          name: EscanerLibros-Windows
+          path: dist/EscanerLibros
+          retention-days: 90
+
+      - name: Publicar versión (solo con etiquetas v*)
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/EscanerLibros-Windows.zip

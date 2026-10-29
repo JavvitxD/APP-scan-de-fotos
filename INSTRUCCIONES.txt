@@ -1,0 +1,131 @@
+=====================================================================
+                     ESCÁNER DE LIBROS - INSTRUCCIONES
+=====================================================================
+
+Convierte las fotos de las páginas de un libro en una copia digital:
+texto corregible, PDF en el que se puede buscar, y documento de Word.
+
+TODO SE HACE EN ESTE COMPUTADOR. No usa internet y las fotos nunca
+salen del equipo.
+
+
+---------------------------------------------------------------------
+1. INSTALAR (en este u otro computador con Windows 10 u 11)
+---------------------------------------------------------------------
+
+No hay que instalar nada más: la carpeta trae todo lo necesario.
+
+  1. Copie la carpeta completa "EscanerLibros" a un lugar sencillo,
+     por ejemplo:   C:\EscanerLibros
+     (Recomendado: evite el Escritorio sincronizado con OneDrive y
+     la carpeta "Archivos de programa".)
+
+     Si la recibió como archivo .zip: clic derecho sobre el .zip >
+     "Extraer todo..." y elija C:\ como destino.
+
+  2. Abra la carpeta y haga doble clic en  EscanerLibros.exe
+
+  3. La primera vez Windows puede mostrar un aviso azul:
+     "Windows protegió su PC". Es normal: el programa no está
+     firmado por una empresa. Pulse "Más información" y luego
+     "Ejecutar de todas formas". Solo pasa la primera vez.
+
+  4. (Opcional) Acceso directo en el escritorio: clic derecho sobre
+     EscanerLibros.exe > "Mostrar más opciones" > "Enviar a" >
+     "Escritorio (crear acceso directo)".
+
+IMPORTANTE: no mueva el archivo EscanerLibros.exe fuera de su
+carpeta. Necesita las carpetas "_internal" y "tesseract" que
+están junto a él.
+
+
+---------------------------------------------------------------------
+2. TOMAR LAS FOTOS
+---------------------------------------------------------------------
+
+  - Hoja plana, con luz de día pareja. Sin flash y sin sombras
+    (cuidado con la sombra del celular o de su mano).
+  - Celular derecho, justo encima de la hoja, y que la hoja ocupe
+    casi toda la foto.
+  - Tome las fotos EN ORDEN. El programa las ordena por nombre de
+    archivo, y el celular las numera en el orden en que las tomó.
+  - Puede ser una página por foto o dos (el libro abierto o la
+    fotocopia con dos páginas): el programa las separa solo.
+  - Si tiene escáner o impresora multifunción, escanear a 300 ppp
+    da resultados aún mejores. También acepta archivos PDF.
+
+Pase las fotos del celular al computador (cable USB, WhatsApp Web,
+Google Fotos, etc.) y déjelas juntas en una carpeta.
+
+
+---------------------------------------------------------------------
+3. USAR EL PROGRAMA
+---------------------------------------------------------------------
+
+  1. "Nuevo libro": escriba el nombre y elija cuántas páginas trae
+     cada foto (si no está seguro, deje "Detectar automáticamente").
+
+  2. "Agregar fotos": seleccione todas las fotos (Ctrl + A dentro de
+     la carpeta). También puede arrastrarlas a la ventana.
+
+  3. Revise las miniaturas de la izquierda:
+       - Arrástrelas para cambiar el orden.
+       - "Girar" si alguna quedó de lado.
+       - "Una / dos páginas" si una foto se partió mal.
+       - "Eliminar" para quitar fotos repetidas o malas.
+
+  4. "Procesar pendientes" (tecla F5): el programa limpia cada foto
+     y lee el texto. Para 300 páginas puede tardar entre 10 y 30
+     minutos según el computador. Puede pulsar "Detener" y seguir
+     otro día: lo ya hecho queda guardado.
+
+  5. Revisar: a la izquierda ve la página y a la derecha el texto.
+     Corrija lo que haga falta (se guarda solo) y pulse
+     "Revisada" (o Ctrl + Enter) para pasar a la siguiente.
+     Use "Buscar en el libro" (Ctrl + F) para encontrar palabras.
+
+  6. "Exportar":
+       - PDF buscable: se ve igual que el libro y se puede buscar y
+         copiar el texto.
+       - Documento de Word: el texto para leer o editar.
+       - Texto plano: el texto sin formato.
+
+
+---------------------------------------------------------------------
+4. DÓNDE QUEDA GUARDADO / LLEVARLO A OTRO COMPUTADOR
+---------------------------------------------------------------------
+
+Sus libros se guardan dentro de la carpeta del programa, en:
+
+      EscanerLibros\Proyectos\<nombre del libro>\
+
+Ahí están las fotos originales, las páginas limpias y el texto.
+
+Para llevar TODO (programa y libros) a otro computador: copie la
+carpeta "EscanerLibros" completa a una memoria USB y péguela en el
+otro computador (paso 1 de estas instrucciones).
+
+Copia de seguridad: copie de vez en cuando la carpeta "Proyectos"
+a una memoria USB o a un disco externo.
+
+(Si el programa está en una carpeta donde no puede escribir, guarda
+los libros en Documentos\Escaner de Libros.)
+
+
+---------------------------------------------------------------------
+5. SI ALGO FALLA
+---------------------------------------------------------------------
+
+- "No se encontró el programa de reconocimiento de texto": falta la
+  carpeta "tesseract" junto a EscanerLibros.exe. Vuelva a copiar la
+  carpeta completa.
+
+- Una página sale con muchos errores: tómele una foto mejor (más
+  luz, más cerca, sin sombra), agréguela, muévala a su lugar y borre
+  la mala.
+
+- El texto se lee al revés o de lado: seleccione la página, use
+  "Girar" y luego "Volver a procesar".
+
+- No se puede exportar: cierre el archivo si lo tiene abierto en
+  Word o en el lector de PDF, e inténtelo de nuevo.
