@@ -41,6 +41,7 @@ foreach ($junk in @("unins000.exe", "unins000.dat", "doc")) {
 
 # 4. Instrucciones
 Copy-Item (Join-Path $Root "INSTRUCCIONES.txt") $out -Force
+Copy-Item (Join-Path $Root "INSTRUCCIONES_COWORK.md") $out -Force
 
 # 5. Zip listo para copiar a otro computador
 $zip = Join-Path $Root "dist\EscanerLibros-Windows.zip"
